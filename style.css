@@ -68,6 +68,7 @@ button:hover {
 
 .inner {
   text-align: center;
+  min-height: 9rem;
 }
 
 
@@ -142,6 +143,8 @@ button:hover {
   background-color: #4e265e;
   height: 5px;
   width: 100%;
+  max-width: 780px;
+  margin: auto;
 }
 .progressInner {
   background-color: rgba(255,255,255,.2);
