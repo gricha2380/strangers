@@ -31,7 +31,7 @@ body {
 
 .intro {
   background-color: #4e265e;
-  color: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.5);
   font-size: 1.5em;
   padding: 40px;
   max-width: 700px;

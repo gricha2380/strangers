@@ -3,7 +3,7 @@
 // event listener to stop script from loading until page is fully rendered
 document.addEventListener('DOMContentLoaded', function(){
   // ask for user name
-  var userName = prompt('Hi, what\'s your name?');
+  let userName = prompt('Hi, what\'s your name?');
   // if user provides a name, use it
   if (userName == null || userName.length == 0) {
     document.querySelector('.userName').innerHTML = 'Hi Anonymous Strangers! ';
@@ -13,11 +13,8 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelector('.userName').innerHTML = 'Hi ' + userName + '. ';
     console.log(userName);
   }
-  // saving object of correct answers. Used in button event listners to compare user input
-  var choices = {'yes':['yes','y'],'no':['no','n']};
-  // initiate score to track points and counter to incriment progress
-  var score = 0;
-  var counter = 0;
+  let score = 0;
+  let counter = 0;
 
   let questionSet = [
     "Given the choice of anyone in the world, whom would you want as a dinner guest?",
@@ -38,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function(){
     "What is your most terrible memory?",
     "What's your favorite Youtube channel?",
     "Who's your favorite imaginary super hero?",
-    "Who's your favorite real life hero?"
+    "Who's your favorite real life hero?",
+    "If you could resurrect any extinct species, what would it be?"
   ];
 
   questionSet = questionSet.sort(()=> {return .5 - Math.random()})
@@ -70,8 +68,6 @@ document.addEventListener('DOMContentLoaded', function(){
       document.querySelector('.feedback').innerHTML = '👍';
       document.querySelector('.feedback').classList.toggle('live');
       hideFeedback();
-
-      
     }
     else {
       document.querySelector('.intro').setAttribute('style','background-color:green');
@@ -90,62 +86,5 @@ document.addEventListener('DOMContentLoaded', function(){
       document.querySelector('.feedback').classList.toggle('live');
     }, 1000);
   }
-
-  // incriment counter and print status
-  function updateStatus(){
-    console.log('question was: ' + questions[counter].question);
-    console.log('answer was ' + questions[counter].answer[0]);
-    console.log('score is ' + score);
-    counter++;
-  }
-
-  // show score and reset code
-  function thanksForPlaying(){
-    document.querySelector('.beginHolder').setAttribute('style','display:none');
-    document.querySelector('.answerChoices').setAttribute('style','display:block');
-    document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-    document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
-    document.querySelector('.answerChoices').innerHTML = '<button onClick="location.reload();">Restart</button>';
-  }
-
-  // incriment score if correct then show next question. Otherwise show score
-  function ifCorrect() {
-    // increase score
-    score++;
-
-    // show feedback for current question
-    document.querySelector('.caption').innerHTML = questions[counter].correct;
-
-    // go to next question
-    updateStatus();
-
-    // animate 'correct' badge with CSS then hide after delay
-    document.querySelector('.feedback').innerHTML = 'Correct!';
-    document.querySelector('.feedback').classList.toggle('live');
-    hideFeedback();
-
-    // only run if there are questions left to show
-    if (counter < questions.length) {
-      document.querySelector('.inner').innerHTML = questions[counter].question;
-    } else {
-      thanksForPlaying();
-    }
-  } // end correct
-
-  // if there are questions left, show next one. Otherwise show score
-  function ifIncorrect() {
-    // show feedback for current question
-    document.querySelector('.caption').innerHTML = questions[counter].incorrect;
-
-    // go to next question
-    updateStatus();
-
-    // only run if there are questions left to show
-    if (counter < questions.length) {
-      document.querySelector('.inner').innerHTML = questions[counter].question;
-    } else {
-      thanksForPlaying();
-    }
-  } // end incorrect
 
 }); // end document ready
